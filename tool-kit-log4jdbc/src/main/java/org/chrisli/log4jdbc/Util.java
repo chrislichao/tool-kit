@@ -4,15 +4,14 @@ package org.chrisli.log4jdbc;
  * [工具类]
  * 
  * @author Chris li[黎超]
- * @version [版本, 2017-04-12]
- * @see
+ * @create [2017-04-12]
  */
 public class Util {
 	/**
 	 * [右对齐]
 	 * 
 	 * @author Chris li[黎超]
-	 * @version [版本, 2017-04-12]
+	 * @create [2017-04-12]
 	 */
 	public static String rightJustify(int fieldSize, String field) {
 		if (field == null) {

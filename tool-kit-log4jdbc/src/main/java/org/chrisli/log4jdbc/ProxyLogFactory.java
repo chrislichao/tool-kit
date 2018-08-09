@@ -6,8 +6,7 @@ import org.chrisli.log4jdbc.logger.Slf4jProxyLogDelegator;
  * [代理日志委托者工厂]
  * 
  * @author Chris li[黎超]
- * @version [版本, 2017-04-12]
- * @see
+ * @create [2017-04-12]
  */
 public class ProxyLogFactory {
 

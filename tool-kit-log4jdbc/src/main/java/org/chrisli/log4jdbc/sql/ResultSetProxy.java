@@ -25,8 +25,12 @@ import java.util.Map;
 import org.chrisli.log4jdbc.Proxy;
 import org.chrisli.log4jdbc.ProxyLogDelegator;
 import org.chrisli.log4jdbc.ProxyLogFactory;
-
-@SuppressWarnings("unchecked")
+/**
+ * [结果集代理类]
+ *
+ * @author Chris li[黎超]
+ * @create [2017-04-12]
+ */
 public class ResultSetProxy implements ResultSet, Proxy {
 	private final ProxyLogDelegator log;
 
@@ -2100,7 +2104,7 @@ public class ResultSetProxy implements ResultSet, Proxy {
 		}
 	}
 
-	@Override
+
 	public Object getObject(String columnLabel, Map<String, Class<?>> map) throws SQLException {
 		String methodCall = "getObject(" + columnLabel + ", " + map + ")";
 		try {
@@ -2111,7 +2115,7 @@ public class ResultSetProxy implements ResultSet, Proxy {
 		}
 	}
 
-	@Override
+
 	public <T> T getObject(int columnIndex, Class<T> type) throws SQLException {
 		String methodCall = "getObject(" + columnIndex + ", " + type + ")";
 		try {
@@ -2122,7 +2126,7 @@ public class ResultSetProxy implements ResultSet, Proxy {
 		}
 	}
 
-	@Override
+
 	public <T> T getObject(String columnLabel, Class<T> type) throws SQLException {
 		String methodCall = "getObject(" + columnLabel + ", " + type + ")";
 		try {

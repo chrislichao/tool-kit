@@ -11,32 +11,30 @@ import org.chrisli.log4jdbc.sql.DriverProxy;
 
 /**
  * [JDBC日志拦截器]
- * 
+ *
  * @author Chris li[黎超]
- * @version [版本, 2017-04-12]
- * @see
+ * @create [2017-04-12]
  */
 public class Log4jdbcInterceptor implements MethodInterceptor {
 
-	private RdbmsSpecifics rdbmsSpecifics = null;
+    private RdbmsSpecifics rdbmsSpecifics = null;
 
-	private RdbmsSpecifics getRdbmsSpecifics(Connection conn) {
-		if (rdbmsSpecifics == null) {
-			rdbmsSpecifics = DriverProxy.getRdbmsSpecifics(conn);
-		}
-		return rdbmsSpecifics;
-	}
+    private RdbmsSpecifics getRdbmsSpecifics(Connection conn) {
+        if (rdbmsSpecifics == null) {
+            rdbmsSpecifics = DriverProxy.getRdbmsSpecifics(conn);
+        }
+        return rdbmsSpecifics;
+    }
 
-	@Override
-	public Object invoke(MethodInvocation invocation) throws Throwable {
-		Object result = invocation.proceed();
-		if (ProxyLogFactory.getProxyLogDelegator().isJdbcLoggingEnabled()) {
-			if (result instanceof Connection) {
-				Connection conn = (Connection) result;
-				return new ConnectionProxy(conn, getRdbmsSpecifics(conn));
-			}
-		}
-		return result;
-	}
+    public Object invoke(MethodInvocation invocation) throws Throwable {
+        Object result = invocation.proceed();
+        if (ProxyLogFactory.getProxyLogDelegator().isJdbcLoggingEnabled()) {
+            if (result instanceof Connection) {
+                Connection conn = (Connection) result;
+                return new ConnectionProxy(conn, getRdbmsSpecifics(conn));
+            }
+        }
+        return result;
+    }
 
 }
