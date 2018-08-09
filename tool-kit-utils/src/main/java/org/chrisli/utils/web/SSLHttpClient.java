@@ -20,7 +20,6 @@ import java.security.cert.X509Certificate;
  * @create [2017-04-12]
  */
 public class SSLHttpClient {
-
     /**
      * [注册SSL连接]
      */
@@ -70,7 +69,7 @@ public class SSLHttpClient {
             }
         };
         // 初始化SSL上下文
-        ctx.init(null, new TrustManager[] { tm }, new java.security.SecureRandom());
+        ctx.init(null, new TrustManager[]{tm}, new java.security.SecureRandom());
         // 创建SSL连接
         SSLSocketFactory socketFactory = new SSLSocketFactory(ctx, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         Scheme sch = new Scheme(scheme, port, socketFactory);

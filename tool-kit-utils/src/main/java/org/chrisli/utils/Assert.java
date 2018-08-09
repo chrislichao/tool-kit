@@ -16,9 +16,8 @@ import java.util.regex.Pattern;
  * @create [2017-04-12]
  */
 public class Assert {
-
     /**
-     * 正整数类型的分隔格式
+     * [正整数类型的分隔格式]
      */
     public final static String POSITIVE_INTEGER_TYPE_FORMAT = "^[1-9]\\d*(,[1-9]\\d*)*$";
 

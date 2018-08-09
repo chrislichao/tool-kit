@@ -13,6 +13,7 @@ import java.util.Map;
  * @create [2017-04-12]
  */
 public abstract class BaseEntity implements Serializable{
+
     private static final long serialVersionUID = 1L;
 
     /**

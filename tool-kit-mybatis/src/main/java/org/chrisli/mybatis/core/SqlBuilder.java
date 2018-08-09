@@ -26,10 +26,14 @@ import java.util.*;
 public class SqlBuilder {
     private static Logger logger = LoggerFactory.getLogger(SqlBuilder.class);
 
-    // 存放model类对应的CoreTable
+    /**
+     * [存放model类对应的CoreTable]
+     */
     private static Map<Class<? extends BaseEntity>, CoreTable> coreTableMap = new HashMap<Class<? extends BaseEntity>, CoreTable>();
 
-    // 存放错误信息
+    /**
+     * [存放错误信息]
+     */
     private static String errorMsg;
 
     /**

@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
  * @create [2017-04-12]
  */
 public class HttpUtil {
+
     private static Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     /**

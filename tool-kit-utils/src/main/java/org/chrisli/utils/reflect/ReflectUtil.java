@@ -19,6 +19,7 @@ import java.util.Map;
  * @create [2017-04-12]
  */
 public class ReflectUtil {
+
     private static Logger logger = LoggerFactory.getLogger(ReflectUtil.class);
 
     /**

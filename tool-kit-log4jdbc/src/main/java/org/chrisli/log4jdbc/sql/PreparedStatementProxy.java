@@ -50,10 +50,8 @@ public class PreparedStatementProxy extends StatementProxy implements PreparedSt
         } catch (Throwable t) {
             log.debug("rdbmsSpecifics threw an exception while trying to format a " + "parameter object [" + arg + "] this is very bad!!! ("
                     + t.getMessage() + ")");
-
             tracedArg = arg == null ? "null" : arg.toString();
         }
-
         i--;
         synchronized (argTrace) {
             while (i >= argTrace.size()) {
@@ -69,7 +67,6 @@ public class PreparedStatementProxy extends StatementProxy implements PreparedSt
         int Qpos = sql.indexOf('?', lastPos);
         int argIdx = 0;
         String arg;
-
         while (Qpos != -1) {
             synchronized (argTrace) {
                 try {

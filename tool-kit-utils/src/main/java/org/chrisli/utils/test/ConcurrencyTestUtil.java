@@ -3,6 +3,7 @@ package org.chrisli.utils.test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.chrisli.utils.test.concurrency.Callback;
+
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -12,6 +13,7 @@ import java.util.concurrent.CountDownLatch;
  * @create [2017-04-12]
  */
 public class ConcurrencyTestUtil {
+
     private static Logger logger = LoggerFactory.getLogger(ConcurrencyTestUtil.class);
 
     private Callback callBack;

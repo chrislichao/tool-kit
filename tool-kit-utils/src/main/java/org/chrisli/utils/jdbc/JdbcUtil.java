@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
  * @create [2017-04-12]
  */
 public class JdbcUtil {
-
     /**
      * [SQL注入的正则表达式]
      */

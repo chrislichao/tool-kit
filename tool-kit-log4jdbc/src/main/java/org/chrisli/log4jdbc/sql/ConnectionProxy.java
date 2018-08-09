@@ -34,13 +34,8 @@ import org.chrisli.log4jdbc.rdbms.RdbmsSpecifics;
  * @create [2017-04-12]
  */
 public class ConnectionProxy implements Connection, Proxy {
-
     /**
      * [将真实的连接包装成代理连接]
-     *
-     * @author Chris li[黎超]
-     * @create [2017-04-12]
-     * @see
      */
     public ConnectionProxy(Connection realConnection) {
         this(realConnection, DriverProxy.defaultRdbmsSpecifics);
@@ -48,10 +43,6 @@ public class ConnectionProxy implements Connection, Proxy {
 
     /**
      * [将真实的连接包装成代理连接]
-     *
-     * @author Chris li[黎超]
-     * @create [2017-04-12]
-     * @see
      */
     public ConnectionProxy(Connection realConnection, RdbmsSpecifics rdbmsSpecifics) {
         if (rdbmsSpecifics == null) {
@@ -81,9 +72,6 @@ public class ConnectionProxy implements Connection, Proxy {
 
     /**
      * [获取真实的连接]
-     *
-     * @author Chris li[黎超]
-     * @create [2017-04-12]
      */
     public Connection getRealConnection() {
         return realConnection;
@@ -95,9 +83,6 @@ public class ConnectionProxy implements Connection, Proxy {
 
     /**
      * [获取开启的连接数信息]
-     *
-     * @author Chris li[黎超]
-     * @create [2017-04-12]
      */
     public static String getOpenConnectionsDump() {
         StringBuffer dump = new StringBuffer();

@@ -14,6 +14,7 @@ import java.net.URL;
  * @create [2017-04-12]
  */
 public class EhcacheUtil {
+
     private static final String PATH = "/ehcache-util.xml";
 
     private static final String DEFAULT_CACHE_NAME = "SystemCache";
@@ -42,7 +43,6 @@ public class EhcacheUtil {
      */
     private static Cache getCache(String cacheName) {
         Assert.notBlank(cacheName, "缓存名非法!");
-
         Cache cache = getCacheManagerInstance().getCache(cacheName);
         Assert.notNull(cache, "未找到对应的缓存对象[" + cacheName + "]!");
         return cache;
@@ -75,7 +75,6 @@ public class EhcacheUtil {
      */
     public static void put(String cacheName, String key, Object value) {
         Assert.notBlank(key, "缓存Key非法!");
-
         synchronized (key.intern()) {
             Cache cache = getCache(cacheName);
             Element element = new Element(key, value);
@@ -96,7 +95,6 @@ public class EhcacheUtil {
      */
     public static void put(String cacheName, String key, Object value, int timeToLiveSeconds, int timeToIdleSeconds) {
         Assert.notBlank(key, "缓存Key非法!");
-
         synchronized (key.intern()) {
             Cache cache = getCache(cacheName);
             Element element = new Element(key, value);
@@ -119,7 +117,6 @@ public class EhcacheUtil {
      */
     public static Object get(String cacheName, String key) {
         Assert.notBlank(key, "缓存Key非法!");
-
         synchronized (key.intern()) {
             Cache cache = getCache(cacheName);
             Element element = cache.get(key);
@@ -139,7 +136,6 @@ public class EhcacheUtil {
      */
     public static synchronized void remove(String cacheName, String key) {
         Assert.notBlank(key, "缓存Key非法!");
-
         getCache(cacheName).remove(key);
     }
 }

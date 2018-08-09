@@ -36,7 +36,6 @@ public class SplitUtil {
         Assert.isTrue(count > 0, "参数{count}不允许小于等于零!");
         Assert.notNull(around, "参数{around}不允许为空!");
         Assert.notBlank(separator, "参数{separator}不允许为空!");
-
         List<String> splitList = new ArrayList<String>();
         StringBuffer buffer = new StringBuffer();
         String[] array = source.split(regex);
@@ -48,7 +47,6 @@ public class SplitUtil {
             buffer.append(separator).append(around).append(array[i]).append(around);
         }
         splitList.add(buffer.toString().substring(separator.length()));
-
         return splitList;
     }
 }

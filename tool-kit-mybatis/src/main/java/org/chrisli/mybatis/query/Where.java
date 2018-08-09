@@ -27,7 +27,7 @@ import java.util.Map;
  * @author Chris li[黎超]
  * @create [2017-04-12]
  */
-public class Where implements Serializable{
+public class Where implements Serializable {
     /**
      * [field方法错误异常]
      */
@@ -54,40 +54,40 @@ public class Where implements Serializable{
     private Class<?> clazz;
 
     /**
-     * 当前字段,在执行field方法时赋值
+     * [当前字段,在执行field方法时赋值]
      */
     private String curField = "";
     /**
-     * 存放所有条件()
+     * [存放所有条件]
      */
     private StringBuffer whereSb = new StringBuffer();
     /**
-     * 存放排序字段
+     * [存放排序字段]
      */
     private StringBuffer orderBySb = new StringBuffer();
 
     /**
-     * 存放查询字段信息
+     * [存放查询字段信息]
      */
     private Map<String, String> fieldMap = new HashMap<String, String>();
 
     /**
-     * 存放查询字段和值信息
+     * [存放查询字段和值信息]
      */
     private Map<String, String> fieldValueMap = new HashMap<String, String>();
 
     /**
-     * 存放左连接字段信息
+     * [存放左连接字段信息]
      */
     private Map<String, LeftJoin> fieldLeftJoinMap = new HashMap<String, LeftJoin>();
 
     /**
-     * 存放操作字段集合
+     * [存放操作字段集合]
      */
     private List<String> fieldList = new ArrayList<String>();
 
     /**
-     *[ 私有构造方法,不能通过new创建对象]
+     * [ 私有构造方法,不能通过new创建对象]
      */
     private Where(Class<?> clazz) {
         this.clazz = clazz;
@@ -102,6 +102,7 @@ public class Where implements Serializable{
     }
 
     // ------------------------------------------------字段-----------------------------------------------//
+
     /**
      * [设置字段]
      */
@@ -165,6 +166,7 @@ public class Where implements Serializable{
 
     // 操作符
     // equal,notEqual,contains,notContains,startsWith,notStartsWith,endsWith,notEndsWith,in,notIn,greaterThan,gtoet,lessThan,ltoet,isNull,isNotNull//
+
     /**
      * [等于XXX]
      */
@@ -239,7 +241,6 @@ public class Where implements Serializable{
 
     /**
      * [在XXX范围内]
-     *
      */
     public Where in(String str) {
         JdbcUtil.sensitiveValidate(str);
@@ -325,6 +326,7 @@ public class Where implements Serializable{
     }
 
     // ------------------------------------------------连接符-----------------------------------------------//
+
     /**
      * [连接符and]
      */
@@ -357,6 +359,7 @@ public class Where implements Serializable{
     }
 
     // ------------------------------------------------排序-----------------------------------------------//
+
     /**
      * [顺序排列]
      */

@@ -8,11 +8,11 @@ package org.chrisli.mybatis.enums;
  */
 public enum OrderByPolicy {
     /**
-     * 顺序排列
+     * [顺序排列]
      */
     ASC("ASC"),
     /**
-     * 逆序排列
+     * [逆序排列]
      */
     DESC("DESC");
 
@@ -25,5 +25,4 @@ public enum OrderByPolicy {
     public String toString() {
         return this.policy;
     }
-
 }

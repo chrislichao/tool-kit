@@ -20,15 +20,15 @@ import java.util.Map;
  */
 public class JwtUtil {
     /**
-     * 存放JWT头信息
+     * [存放JWT头信息]
      */
     private static Map<String, Object> headMap = new HashMap<String, Object>();
     /**
-     * JWT签发者
+     * [JWT签发者]
      */
     private static final String ISSUER = "ChrisLi";
     /**
-     * 加密密钥(仅存于服务器端)
+     * [加密密钥(仅存于服务器端)]
      */
     private static final String SECRET = "IlovEthiSgamE";
 

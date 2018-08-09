@@ -35,7 +35,7 @@ public class EncryptUtil {
      * [加密的核心方法]
      */
     private static final String decode(String str, String decodeType) {
-        char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
         try {
             MessageDigest mdTemp = MessageDigest.getInstance(decodeType);

@@ -15,30 +15,32 @@ import java.util.List;
  * @create [2017-04-12]
  */
 public class CoreTable {
-
+    /**
+     * [错误信息]
+     */
     private String errorMsg;
     /**
-     * 一个CoreSqlBuilder对应一个model的class
+     * [一个CoreSqlBuilder对应一个model的class]
      */
     private Class<?> clazz;
     /**
-     * 对应的数据库表名
+     * [对应的数据库表名]
      */
     private String tableName;
     /**
-     * 对应的数据库表别名
+     * [对应的数据库表别名]
      */
     private String tableAlias;
     /**
-     * 该数据表下所有主键列
+     * [该数据表下所有主键列]
      */
     private List<CoreColumn> pkColumnList;
     /**
-     * 该数据表下所有列
+     * [该数据表下所有列]
      */
     private List<CoreColumn> columnList;
     /**
-     * 是否包含左连接字段
+     * [是否包含左连接字段]
      */
     private boolean containLeftJoinColumn;
 

@@ -7,6 +7,7 @@ package org.chrisli.utils.exception;
  * @create [2017-04-12]
  */
 public class FrameworkException extends RuntimeException {
+    
     private static final long serialVersionUID = 1L;
 
     public FrameworkException() {

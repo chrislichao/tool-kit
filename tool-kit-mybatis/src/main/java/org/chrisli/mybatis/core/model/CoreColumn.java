@@ -11,35 +11,35 @@ import org.chrisli.mybatis.annotation.OrderBy;
  */
 public class CoreColumn implements Comparable<CoreColumn>{
     /**
-     * 是否数据表字段
+     * [是否数据表字段]
      */
     private boolean columnField;
     /**
-     * 字段名
+     * [字段名]
      */
     private String fieldName;
     /**
-     * 对应的表列名
+     * [对应的表列名]
      */
     private String columnName;
     /**
-     * 是否是主键字段
+     * [是否是主键字段]
      */
     private boolean idField;
     /**
-     * 是否是左连接字段
+     * [是否是左连接字段]
      */
     private boolean leftJoinField;
     /**
-     * 如果为左连接字段,该字段存放左连接配置
+     * [如果为左连接字段,该字段存放左连接配置]
      */
     private LeftJoin leftJoinConfig;
     /**
-     * 是否是排序字段
+     * [是否是排序字段]
      */
     private boolean orderByField;
     /**
-     * 如果是排序字段,该字段存放排序策略
+     * [如果是排序字段,该字段存放排序策略]
      */
     private OrderBy orderByConfig;
 

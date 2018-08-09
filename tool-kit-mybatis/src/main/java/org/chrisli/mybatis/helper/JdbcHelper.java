@@ -10,6 +10,7 @@ import org.chrisli.utils.Assert;
 import org.chrisli.utils.exception.FrameworkException;
 import org.chrisli.utils.jdbc.JdbcUtil;
 import org.chrisli.utils.reflect.ReflectUtil;
+
 import java.lang.reflect.Field;
 
 /**
@@ -20,14 +21,17 @@ import java.lang.reflect.Field;
  */
 public class JdbcHelper {
     /**
-     * 字符串转换为大写
+     * [字符串转换为大写]
      */
     private static boolean toUpper = true;
     /**
-     * 表别名前缀
+     * [表别名前缀]
      */
     private static final String TABLE_ALIAS_PREFIX = "CL_";
 
+    /**
+     * [根据大小写策略转换字符串]
+     */
     public static String switchByCase(String value) {
         return toUpper ? value.toUpperCase() : value.toLowerCase();
     }
@@ -72,7 +76,7 @@ public class JdbcHelper {
     /**
      * [获取本表中的on列名]
      */
-    public static String getSelfOnFieldColumn(Class<?> selfClazz, LeftJoin leftJoin){
+    public static String getSelfOnFieldColumn(Class<?> selfClazz, LeftJoin leftJoin) {
         Field onField = ReflectUtil.getField(selfClazz, BaseEntity.class, leftJoin.selfOnField());
         return getColumnName(onField, leftJoin.selfOnField(), leftJoin.refModel().getName());
     }
@@ -80,7 +84,7 @@ public class JdbcHelper {
     /**
      * [获取关联表中的on列名]
      */
-    public static String getReferenceOnFieldColumn(LeftJoin leftJoin){
+    public static String getReferenceOnFieldColumn(LeftJoin leftJoin) {
         Field onField = ReflectUtil.getField(leftJoin.refModel(), BaseEntity.class, leftJoin.refOnField());
         return getColumnName(onField, leftJoin.refOnField(), leftJoin.refModel().getName());
     }
