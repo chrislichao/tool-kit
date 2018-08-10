@@ -22,6 +22,22 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <!-- 定义snapshots和releases库的nexus地址 -->
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <url>
+                http://192.168.0.122:8081/nexus/content/repositories/releases/
+            </url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-releases</id>
+            <url>
+                http://192.168.0.122:8081/nexus/content/repositories/snapshots/
+            </url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <modules>
         <module>tool-kit-log4jdbc</module>
         <module>tool-kit-mybatis</module>
