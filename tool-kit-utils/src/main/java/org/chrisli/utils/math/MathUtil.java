@@ -1,8 +1,6 @@
 package org.chrisli.utils.math;
 
 import org.chrisli.utils.Assert;
-import org.chrisli.utils.exception.FrameworkException;
-
 import java.math.BigDecimal;
 
 /**
