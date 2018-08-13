@@ -152,4 +152,44 @@ public class ReflectUtil {
     private static boolean isMatchedFiledType(Class<?> type) {
         return String.class == type || Integer.class == type || Long.class == type || Double.class == type || Date.class == type;
     }
+
+    /**
+     * [将结果集<Map>转换成指定对象]
+     */
+    public static <T> T mapToBean(Map<String, Object> map, Class<T> clazz) {
+        try {
+            T t = clazz.newInstance();
+            Field[] fields = getAllFields(clazz, Object.class);
+            for (Field field : fields) {
+                Object value = map.get(field.getName().toUpperCase());
+                value = switchByFieldType(field, value);
+                setFieldValue(t, field.getName(), value);
+            }
+            return t;
+        } catch (Exception e) {
+            throw new FrameworkException(e.getMessage());
+        }
+    }
+
+    /**
+     * [根据字段类型转换值类型]
+     */
+    private static Object switchByFieldType(Field field, Object value) {
+        if (value == null || field.getType() == value.getClass()) {
+            return value;
+        }
+        if (field.getType() == String.class) {
+            return String.valueOf(value);
+        }
+        if (field.getType() == Long.class) {
+            return Long.valueOf(value.toString()).longValue();
+        }
+        if (field.getType() == Integer.class) {
+            return Integer.valueOf(value.toString()).intValue();
+        }
+        if (field.getType() == Double.class) {
+            return Double.valueOf(value.toString()).doubleValue();
+        }
+        return (Date) value;
+    }
 }
