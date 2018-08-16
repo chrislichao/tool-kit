@@ -1,6 +1,6 @@
 package org.chrisli.mybatis.core;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 import org.chrisli.mybatis.Constants;
 import org.chrisli.mybatis.annotation.LeftJoin;

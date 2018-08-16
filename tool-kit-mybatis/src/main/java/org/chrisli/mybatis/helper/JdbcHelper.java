@@ -1,6 +1,6 @@
 package org.chrisli.mybatis.helper;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.chrisli.mybatis.base.BaseEntity;
 import org.chrisli.mybatis.annotation.Column;
 import org.chrisli.mybatis.annotation.Id;

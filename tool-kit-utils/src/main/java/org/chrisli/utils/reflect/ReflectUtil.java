@@ -1,6 +1,6 @@
 package org.chrisli.utils.reflect;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.chrisli.utils.Assert;
 import org.chrisli.utils.exception.FrameworkException;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package org.chrisli.mybatis.core;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.chrisli.mybatis.base.BaseEntity;
 import org.chrisli.mybatis.Constants;
 import org.chrisli.mybatis.annotation.*;
