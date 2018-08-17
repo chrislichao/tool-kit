@@ -189,13 +189,13 @@ public class ReflectUtil {
         if (field.getType() == String.class) {
             return String.valueOf(value);
         }
-        if (field.getType() == Long.class) {
+        if (field.getType() == Long.class || field.getType().getName().equals("long")) {
             return Long.valueOf(value.toString()).longValue();
         }
-        if (field.getType() == Integer.class) {
+        if (field.getType() == Integer.class || field.getType().getName().equals("int")) {
             return Integer.valueOf(value.toString()).intValue();
         }
-        if (field.getType() == Double.class) {
+        if (field.getType() == Double.class || field.getType().getName().equals("double")) {
             return Double.valueOf(value.toString()).doubleValue();
         }
         return (Date) value;
