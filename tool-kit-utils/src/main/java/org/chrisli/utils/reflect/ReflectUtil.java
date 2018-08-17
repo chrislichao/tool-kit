@@ -154,14 +154,22 @@ public class ReflectUtil {
     }
 
     /**
-     * [将结果集<Map>转换成指定对象]
+     * [将结果集<Map>转换成指定对象,字段名对应map中的key]
      */
     public static <T> T mapToBean(Map<String, Object> map, Class<T> clazz) {
+        return mapToBean(map, clazz, false);
+    }
+
+    /**
+     * [将结果集<Map>转换成指定对象,字段名转大写后对应map中的key]
+     */
+    public static <T> T mapToBean(Map<String, Object> map, Class<T> clazz, boolean fieldUpperMatch) {
         try {
             T t = clazz.newInstance();
             Field[] fields = getAllFields(clazz, Object.class);
             for (Field field : fields) {
-                Object value = map.get(field.getName().toUpperCase());
+                String key = fieldUpperMatch ? field.getName().toUpperCase() : field.getName();
+                Object value = map.get(key);
                 value = switchByFieldType(field, value);
                 setFieldValue(t, field.getName(), value);
             }
