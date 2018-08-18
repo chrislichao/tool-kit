@@ -3,6 +3,7 @@ package org.chrisli.utils.reflect;
 import org.apache.commons.lang3.ArrayUtils;
 import org.chrisli.utils.Assert;
 import org.chrisli.utils.exception.FrameworkException;
+import org.chrisli.utils.kit.ConvertUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -170,7 +171,7 @@ public class ReflectUtil {
             for (Field field : fields) {
                 String key = fieldUpperMatch ? field.getName().toUpperCase() : field.getName();
                 Object value = map.get(key);
-                value = switchByFieldType(field, value);
+                value = ConvertUtil.convert(field.getType(), value);
                 setFieldValue(t, field.getName(), value);
             }
             return t;
@@ -179,25 +180,4 @@ public class ReflectUtil {
         }
     }
 
-    /**
-     * [根据字段类型转换值类型]
-     */
-    private static Object switchByFieldType(Field field, Object value) {
-        if (value == null || field.getType() == value.getClass()) {
-            return value;
-        }
-        if (field.getType() == String.class) {
-            return String.valueOf(value);
-        }
-        if (field.getType() == Long.class || field.getType().getName().equals("long")) {
-            return Long.valueOf(value.toString()).longValue();
-        }
-        if (field.getType() == Integer.class || field.getType().getName().equals("int")) {
-            return Integer.valueOf(value.toString()).intValue();
-        }
-        if (field.getType() == Double.class || field.getType().getName().equals("double")) {
-            return Double.valueOf(value.toString()).doubleValue();
-        }
-        return (Date) value;
-    }
 }

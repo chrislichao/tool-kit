@@ -1,5 +1,6 @@
 package org.chrisli.utils.kit;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.chrisli.utils.Assert;
 
 import java.util.ArrayList;
@@ -48,5 +49,35 @@ public class SplitUtil {
         }
         splitList.add(buffer.toString().substring(separator.length()));
         return splitList;
+    }
+
+    /**
+     * [集合{sourceList},拆分成最大容量为50的子集合]
+     */
+    public static <T> List<List<T>> splitListPerFifty(List<T> sourceList) {
+        return splitList(sourceList, 50);
+    }
+
+    /**
+     * [集合{sourceList},拆分成最大容量为{subListMaxSize}的子集合]
+     */
+    public static <T> List<List<T>> splitList(List<T> sourceList, int subListMaxSize) {
+        Assert.isTrue(CollectionUtils.isNotEmpty(sourceList), "参数{sourceList}不允许为空!");
+        Assert.isTrue(subListMaxSize > 0, "参数{subListMaxSize}不允许小于等于零!");
+        List<List<T>> resultList = new ArrayList<List<T>>();
+        int remaider = sourceList.size() % subListMaxSize;
+        int number = (sourceList.size() / subListMaxSize) + (remaider == 0 ? 0 : 1);
+        for (int i = 0; i < number; i++) {
+            List<T> subList = null;
+            if (i != number - 1) {
+                // 非最后一个集合
+                subList = sourceList.subList(i * subListMaxSize, (i + 1) * subListMaxSize);
+            } else {
+                // 最后一个集合
+                subList = sourceList.subList(i * subListMaxSize, sourceList.size());
+            }
+            resultList.add(subList);
+        }
+        return resultList;
     }
 }
