@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.chrisli.utils.exception.FrameworkException;
 
+import java.util.List;
+
 /**
  * [Json工具类]
  *
@@ -49,5 +51,12 @@ public class JsonUtil {
      */
     public static <T> T jsonToBean(String json, Class<T> clazz) {
         return JSON.parseObject(json, clazz);
+    }
+
+    /**
+     * [将Json字符串转换成JavaBean对象集合]
+     */
+    public static <T> List<T> jsonToBeanList(String json, Class<T> clazz) {
+        return JSON.parseArray(json, clazz);
     }
 }
