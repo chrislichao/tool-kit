@@ -819,5 +819,4 @@ public class PreparedStatementProxy extends StatementProxy implements PreparedSt
             throw s;
         }
     }
-
 }

@@ -1262,5 +1262,4 @@ public class CallableStatementProxy extends PreparedStatementProxy implements Ca
             throw s;
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package org.chrisli.utils.kit;
 
+import org.chrisli.utils.Assert;
 import org.chrisli.utils.date.DateUtil;
 import org.chrisli.utils.exception.FrameworkException;
 import org.chrisli.utils.json.JsonUtil;
@@ -54,5 +55,37 @@ public class ConvertUtil {
         } catch (Exception e) {
             throw new FrameworkException(value + "转换为json字符串失败!");
         }
+    }
+
+    /**
+     * [在{value}的前方使用"0"字符串补齐,直到长度为{length}返回]
+     *
+     * @author Chris li[黎超]
+     * @create [2017-04-12]
+     */
+    public static String convertFixedLength(String value, int length) {
+        return convertFixedLength(value, true, "0", length);
+    }
+
+    /**
+     * [在{value}的{fillDirection}[true=前方,false=后方]使用{fillValue}字符串补齐,直到长度为{length}返回]
+     *
+     * @author Chris li[黎超]
+     * @create [2017-04-12]
+     */
+    public static String convertFixedLength(String value, boolean fillDirection, String fillValue, int length) {
+        Assert.isTrue(fillValue.length() == 1, "填充的字符串长度必须为1!");
+        if (value.length() >= length) {
+            return value;
+        }
+        StringBuffer buffer = new StringBuffer(value);
+        for (int i = 0; i < (length - value.length()); i++) {
+            if (fillDirection) {
+                buffer.insert(0, fillValue);
+            } else {
+                buffer.append(fillValue);
+            }
+        }
+        return buffer.toString();
     }
 }
