@@ -60,11 +60,11 @@ public class Where implements Serializable {
     /**
      * [存放所有条件]
      */
-    private StringBuffer whereSb = new StringBuffer();
+    private StringBuffer whereBuffer = new StringBuffer();
     /**
      * [存放排序字段]
      */
-    private StringBuffer orderBySb = new StringBuffer();
+    private StringBuffer orderByBuffer = new StringBuffer();
 
     /**
      * [存放查询字段信息]
@@ -111,7 +111,7 @@ public class Where implements Serializable {
         fieldList.add(field);
         // 必须先设置字段
         if (nextIsField) {
-            whereSb.append(" ").append(fieldToColumn(field));
+            whereBuffer.append(" ").append(fieldToColumn(field));
             nextIsField = false;
             nextIsOprate = true;
             nextIsConnect = false;
@@ -120,7 +120,7 @@ public class Where implements Serializable {
         }
         if (nextIsConnect) {
             // 如果没有加上连接符,默认添加and
-            whereSb.append(" AND ").append(fieldToColumn(field));
+            whereBuffer.append(" AND ").append(fieldToColumn(field));
             nextIsField = false;
             nextIsOprate = true;
             nextIsConnect = false;
@@ -314,7 +314,7 @@ public class Where implements Serializable {
      */
     private void oprate(String oprate, String value) {
         if (nextIsOprate) {
-            whereSb.append(" ").append(oprate).append(" ").append(value);
+            whereBuffer.append(" ").append(oprate).append(" ").append(value);
             fieldValueMap.put(curField, " " + oprate + " " + value);
             nextIsField = false;
             nextIsOprate = false;
@@ -348,7 +348,7 @@ public class Where implements Serializable {
      */
     private void connect(String connect) {
         if (nextIsConnect) {
-            whereSb.append(" ").append(connect);
+            whereBuffer.append(" ").append(connect);
             nextIsField = true;
             nextIsOprate = false;
             nextIsConnect = false;
@@ -356,6 +356,24 @@ public class Where implements Serializable {
             return;
         }
         throw new FrameworkException(CONNECT_ERROR_MSG);
+    }
+
+    // ------------------------------------------------括号-----------------------------------------------//
+
+    /**
+     * [左括号]
+     */
+    public Where leftBracket() {
+        whereBuffer.append(" (");
+        return this;
+    }
+
+    /**
+     * [右括号]
+     */
+    public Where rightBracket() {
+        whereBuffer.append(" )");
+        return this;
     }
 
     // ------------------------------------------------排序-----------------------------------------------//
@@ -382,9 +400,9 @@ public class Where implements Serializable {
     private void orderBy(String field, OrderByPolicy policy) {
         if (nextIsOrderBy) {
             if (!getOrderBy().equals("")) {
-                orderBySb.append(",");
+                orderByBuffer.append(",");
             }
-            orderBySb.append(" ").append(field).append(" ").append(policy.toString());
+            orderByBuffer.append(" ").append(field).append(" ").append(policy.toString());
             nextIsField = false;
             nextIsOprate = false;
             nextIsConnect = false;
@@ -422,7 +440,7 @@ public class Where implements Serializable {
 
 
     public String toString() {
-        String where = whereSb.toString();
+        String where = whereBuffer.toString();
         // 如果以" AND "开头,则删除" AND "
         if (where.startsWith(" AND ")) {
             where = where.substring(5);
@@ -431,7 +449,7 @@ public class Where implements Serializable {
     }
 
     public String getOrderBy() {
-        return orderBySb.toString();
+        return orderByBuffer.toString();
     }
 
     /**

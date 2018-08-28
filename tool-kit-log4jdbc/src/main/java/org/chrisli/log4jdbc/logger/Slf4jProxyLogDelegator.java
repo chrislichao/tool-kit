@@ -100,7 +100,7 @@ public class Slf4jProxyLogDelegator implements ProxyLogDelegator {
             return false;
         }
         sql = sql.substring(0, 6).toLowerCase();
-        return ("select".equals(sql) || "insert".equals(sql) || "update".equals(sql) || "delete".equals(sql) || "create".equals(sql));
+        return ("select".equals(sql) || "insert".equals(sql) || "update".equals(sql) || "delete".equals(sql) || "create".equals(sql) || sql.startsWith("call"));
     }
 
     public void sqlOccured(Proxy proxy, String methodCall, String sql) {
