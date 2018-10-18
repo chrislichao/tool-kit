@@ -94,13 +94,14 @@ public class Slf4jProxyLogDelegator implements ProxyLogDelegator {
         if (sql == null) {
             return false;
         }
-        sql = sql.trim();
-
-        if (sql.length() < 6) {
-            return false;
-        }
-        sql = sql.substring(0, 6).toLowerCase();
-        return ("select".equals(sql) || "insert".equals(sql) || "update".equals(sql) || "delete".equals(sql) || "create".equals(sql) || sql.startsWith("call"));
+        return true;
+        // sql = sql.trim();
+        //
+        // if (sql.length() < 6) {
+        //     return false;
+        // }
+        // sql = sql.substring(0, 6).toLowerCase();
+        // return ("select".equals(sql) || "insert".equals(sql) || "update".equals(sql) || "delete".equals(sql) || "create".equals(sql) || sql.startsWith("call") || sql.startsWith("with"));
     }
 
     public void sqlOccured(Proxy proxy, String methodCall, String sql) {
