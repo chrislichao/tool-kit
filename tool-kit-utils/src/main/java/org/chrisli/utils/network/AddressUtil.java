@@ -18,17 +18,16 @@ import java.net.URL;
  */
 public class AddressUtil {
 
-    private static final String IP_REGION_DB_FILE_PATH = "ip2region/ip2region.db";
+    private static final String IP_REGION_DB_FILE_PATH = "/ip2region.db";
 
     private AddressUtil() {
     }
 
     public static String getCityInfo(String ip) {
         Assert.isTrue(Util.isIpAddress(ip), "IP地址[" + ip + "]不合法!");
-        URL url = AddressUtil.class.getClassLoader().getResource(IP_REGION_DB_FILE_PATH);
+        URL url = AddressUtil.class.getResource(IP_REGION_DB_FILE_PATH);
         Assert.notNull(url, "IP地区的配置文件路径不正确!");
         File file = new File(url.getFile());
-        Assert.isTrue(file.exists(), "IP地区的配置文件不存在!");
         int algorithm = DbSearcher.BTREE_ALGORITHM;
         try {
             DbConfig config = new DbConfig();
