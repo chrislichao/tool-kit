@@ -1,5 +1,6 @@
 package org.chrisli.utils.excel.convertor;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.hssf.usermodel.*;
@@ -14,7 +15,6 @@ import org.chrisli.utils.Assert;
 import org.chrisli.utils.exception.FrameworkException;
 import org.chrisli.utils.kit.MapUtil;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRElt;
-import sun.misc.BASE64Encoder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,7 +82,7 @@ public class HtmlConvertor {
 
     private StringBuilder builder;
 
-    private BASE64Encoder base64Encoder = new BASE64Encoder();
+    private Base64 base64Encoder = new Base64();
 
     private HtmlConvertor(Workbook workbook) {
         this.WORKBOOK = workbook;
@@ -163,7 +163,6 @@ public class HtmlConvertor {
      * @create [2017-04-12]
      */
     private void parsePictures() {
-        BASE64Encoder encoder = new BASE64Encoder();
         if (WORKBOOK instanceof HSSFWorkbook) {
             List<HSSFPictureData> pictureDataList = ((HSSFWorkbook) WORKBOOK).getAllPictures();
             if (CollectionUtils.isNotEmpty(pictureDataList)) {

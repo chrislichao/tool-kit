@@ -2,6 +2,7 @@ package org.chrisli.utils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.chrisli.utils.date.DateUtil;
 import org.chrisli.utils.exception.AssertFailedException;
 
 import java.lang.annotation.Annotation;
@@ -20,6 +21,14 @@ public class Assert {
      * [正整数类型的分隔格式]
      */
     public final static String POSITIVE_INTEGER_TYPE_FORMAT = "^[1-9]\\d*(,[1-9]\\d*)*$";
+    /**
+     * [默认的日期格式]
+     */
+    public final static String DEFAULT_DATE_PATTERN = "yyyy-MM-dd";
+    /**
+     * [默认的日期时间格式]
+     */
+    public final static String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * [断言表达式为真]
@@ -187,6 +196,66 @@ public class Assert {
     public static void isMatchedIdsFormat(String source, String message) {
         notBlank(source);
         if (!Pattern.matches(POSITIVE_INTEGER_TYPE_FORMAT, source)) {
+            throw new AssertFailedException(message);
+        }
+    }
+
+    /**
+     * [断言{text}是正确的日期格式[yyyy-MM-dd]]
+     */
+    public static void isDate(String text) {
+        isDate(text, String.format(
+                "[Assertion failed] - [%s] is not date[format = yyyy-MM-dd] string!", text));
+    }
+
+    /**
+     * [断言{text}是正确的日期格式[yyyy-MM-dd]]
+     */
+    public static void isDate(String text, String message) {
+        notBlank(text);
+        try {
+            DateUtil.dateStrToDate(text, DEFAULT_DATE_PATTERN);
+        } catch (Exception e) {
+            throw new AssertFailedException(message);
+        }
+    }
+
+    /**
+     * [断言{text}是正确的日期时间格式[yyyy-MM-dd HH:mm:ss]]
+     */
+    public static void isDateTime(String text) {
+        isDateTime(text, String.format(
+                "[Assertion failed] - [%s] is not date[format = yyyy-MM-dd HH:mm:ss] string!", text));
+    }
+
+    /**
+     * [断言{text}是正确的日期格式[yyyy-MM-dd HH:mm:ss]]
+     */
+    public static void isDateTime(String text, String message) {
+        notBlank(text);
+        try {
+            DateUtil.dateStrToDate(text, DEFAULT_DATETIME_PATTERN);
+        } catch (Exception e) {
+            throw new AssertFailedException(message);
+        }
+    }
+
+    /**
+     * [断言{text}是正确的日期格式{pattern}]
+     */
+    public static void isPatternDate(String text, String pattern) {
+        isPatternDate(text, pattern, String.format(
+                "[Assertion failed] - [%s] is not date[format = yyyy-MM-dd] string!", text, pattern));
+    }
+
+    /**
+     * [断言{text}是正确的日期格式{pattern}]
+     */
+    public static void isPatternDate(String text, String pattren, String message) {
+        notBlank(text);
+        try {
+            DateUtil.dateStrToDate(text, pattren);
+        } catch (Exception e) {
             throw new AssertFailedException(message);
         }
     }
