@@ -214,6 +214,7 @@ public class Assert {
     public static void isDate(String text, String message) {
         notBlank(text);
         try {
+            isTrue(text.length() == DEFAULT_DATE_PATTERN.length());
             DateUtil.dateStrToDate(text, DEFAULT_DATE_PATTERN);
         } catch (Exception e) {
             throw new AssertFailedException(message);
@@ -234,6 +235,7 @@ public class Assert {
     public static void isDateTime(String text, String message) {
         notBlank(text);
         try {
+            isTrue(text.length() == DEFAULT_DATETIME_PATTERN.length());
             DateUtil.dateStrToDate(text, DEFAULT_DATETIME_PATTERN);
         } catch (Exception e) {
             throw new AssertFailedException(message);
@@ -254,6 +256,7 @@ public class Assert {
     public static void isPatternDate(String text, String pattren, String message) {
         notBlank(text);
         try {
+            isTrue(text.length() == pattren.length());
             DateUtil.dateStrToDate(text, pattren);
         } catch (Exception e) {
             throw new AssertFailedException(message);
