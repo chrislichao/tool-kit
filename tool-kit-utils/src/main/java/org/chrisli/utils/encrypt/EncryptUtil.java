@@ -1,7 +1,10 @@
 package org.chrisli.utils.encrypt;
 
 import org.apache.commons.lang3.StringUtils;
+import org.chrisli.utils.exception.FrameworkException;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.security.MessageDigest;
 
 /**
@@ -11,6 +14,22 @@ import java.security.MessageDigest;
  * @create [2017-04-12]
  */
 public class EncryptUtil {
+
+    private static final String HMACSHA256 = "HmacSHA256";
+
+    /**
+     * [HmacSHA256加密]
+     */
+    public static final byte[] getHmacSHA256(byte[] data, byte[] key) {
+        try {
+            Mac mac = Mac.getInstance(HMACSHA256);
+            mac.init(new SecretKeySpec(key, HMACSHA256));
+            return mac.doFinal(data);
+        } catch (Exception e) {
+            throw new FrameworkException("[HmacSHA256]加密时出现异常!", e);
+        }
+    }
+
     /**
      * [SHA1加密]
      */
@@ -36,7 +55,6 @@ public class EncryptUtil {
      */
     private static final String decode(String str, String decodeType) {
         char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-
         try {
             MessageDigest mdTemp = MessageDigest.getInstance(decodeType);
             mdTemp.update(str.getBytes("UTF-8"));
@@ -51,7 +69,7 @@ public class EncryptUtil {
             }
             return new String(buf);
         } catch (Exception e) {
-            return null;
+            throw new FrameworkException("加密时出现异常!", e);
         }
     }
 }
