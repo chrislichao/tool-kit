@@ -181,4 +181,14 @@ public class DateUtil {
     public static Integer dateStrToSeconds(String dateStr, String pattern) {
         return dateToSeconds(dateStrToDate(dateStr, pattern));
     }
+
+    /**
+     * [日期字符串{dateStr}增加{amount}天返回,格式为"yyyy-MM-dd"]
+     */
+    public static String addDay(String dateStr, int amount) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateStrToDate(dateStr));
+        calendar.add(calendar.DATE, amount);
+        return getDateFormat(DEFAULT_DATE_STR_FORMAT).format(calendar.getTime());
+    }
 }
