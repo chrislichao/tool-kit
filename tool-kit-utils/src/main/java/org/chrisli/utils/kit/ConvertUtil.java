@@ -48,7 +48,7 @@ public class ConvertUtil {
             return String.valueOf(value);
         }
         if (value.getClass() == Date.class) {
-            return DateUtil.dateToSeconds((Date) value).toString();
+            return DateUtil.dateToDatetimeStr((Date) value).toString();
         }
         try {
             return JsonUtil.beanToJson(value);
