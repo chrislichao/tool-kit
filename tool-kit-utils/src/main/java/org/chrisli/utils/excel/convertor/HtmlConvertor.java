@@ -82,8 +82,6 @@ public class HtmlConvertor {
 
     private StringBuilder builder;
 
-    private Base64 base64Encoder = new Base64();
-
     private HtmlConvertor(Workbook workbook) {
         this.WORKBOOK = workbook;
         parseWorkbook();
@@ -456,7 +454,7 @@ public class HtmlConvertor {
         if (cellImgMap.containsKey(imgPoint)) {
             StringBuilder imgBuilder = new StringBuilder();
             imgBuilder.append("<img src=\"data:image/jpeg|png|gif;base64,");
-            imgBuilder.append(base64Encoder.encode(cellImgMap.get(imgPoint).getData()));
+            imgBuilder.append(Base64.encodeBase64String(cellImgMap.get(imgPoint).getData()));
             imgBuilder.append("\"/>");
             return imgBuilder.toString();
         }
