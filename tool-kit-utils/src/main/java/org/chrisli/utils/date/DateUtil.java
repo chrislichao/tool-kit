@@ -51,9 +51,33 @@ public class DateUtil {
      */
     public static Date secondsToDate(Integer seconds) {
         Assert.notNull(seconds);
+        return millisToDate(Long.valueOf(seconds * 1000));
+    }
+
+    /**
+     * [将秒数{seconds}转为日期,格式为{pattern}]
+     */
+    public static Date secondsToDate(Integer seconds, String pattern) {
+        Assert.notNull(seconds);
+        return millisToDate(Long.valueOf(seconds * 1000), pattern);
+    }
+
+    /**
+     * [将毫秒数{millis}转为日期]
+     */
+    public static Date millisToDate(Long millis) {
+        Assert.notNull(millis);
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(seconds * 1000L);
+        calendar.setTimeInMillis(millis);
         return calendar.getTime();
+    }
+
+    /**
+     * [将毫秒数{millis}转为日期,格式为{pattern}]
+     */
+    public static Date millisToDate(Long millis, String pattern) {
+        Assert.notNull(millis);
+        return dateStrToDate(millisToDateStr(millis, pattern), pattern);
     }
 
     /**
@@ -75,6 +99,27 @@ public class DateUtil {
      */
     public static String secondsToDatetimeStr(Integer seconds) {
         return secondsToDateStr(seconds, DEFAULT_DATETIME_STR_FORMAT);
+    }
+
+    /**
+     * [将毫秒数{millis}转为日期字符串,格式为{pattern}]
+     */
+    public static String millisToDateStr(Long millis, String pattern) {
+        return secondsToDateStr(getSeconds(millis), pattern);
+    }
+
+    /**
+     * [将毫秒数{millis}转为日期字符串,格式为"yyyy-MM-dd"]
+     */
+    public static String millisToDateStr(Long millis) {
+        return millisToDateStr(millis, DEFAULT_DATE_STR_FORMAT);
+    }
+
+    /**
+     * [将毫秒数{millis}转为日期时间字符串,格式为"yyyy-MM-dd HH:mm:ss"]
+     */
+    public static String millisToDatetimeStr(Long millis) {
+        return millisToDateStr(millis, DEFAULT_DATETIME_STR_FORMAT);
     }
 
     /**
@@ -188,7 +233,7 @@ public class DateUtil {
     public static String addDay(String dateStr, int amount) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateStrToDate(dateStr));
-        calendar.add(calendar.DATE, amount);
+        calendar.add(Calendar.DATE, amount);
         return getDateFormat(DEFAULT_DATE_STR_FORMAT).format(calendar.getTime());
     }
 }

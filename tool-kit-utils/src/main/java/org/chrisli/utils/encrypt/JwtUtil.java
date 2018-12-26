@@ -6,6 +6,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.chrisli.utils.date.DateUtil;
 import org.chrisli.utils.exception.FrameworkException;
 
 import java.util.Date;
@@ -31,6 +32,10 @@ public class JwtUtil {
      * [加密密钥(仅存于服务器端)]
      */
     private static final String SECRET = "IlovEthiSgamE";
+    /**
+     * [默认的生成令牌的当前时间格式]
+     */
+    private static final String DEFAULT_CURRENT_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     static {
         headMap.put("typ", "JWT");
@@ -41,8 +46,15 @@ public class JwtUtil {
      * [创建JWT Token]
      */
     public static String createToken(Map<String, String> claimMap, long activeTime) {
+        return createToken(claimMap, DEFAULT_CURRENT_TIME_FORMAT, activeTime);
+    }
+
+    /**
+     * [创建JWT Token]
+     */
+    public static String createToken(Map<String, String> claimMap, String currentTimePattern, long activeTime) {
         try {
-            Date expiresAt = new Date(System.currentTimeMillis() + activeTime);
+            Date expiresAt = DateUtil.millisToDate(System.currentTimeMillis() + activeTime, currentTimePattern);
             JWTCreator.Builder builder = JWT.create().withHeader(headMap).withIssuer(ISSUER);
             for (String claimKey : claimMap.keySet()) {
                 builder.withClaim(claimKey, claimMap.get(claimKey));
