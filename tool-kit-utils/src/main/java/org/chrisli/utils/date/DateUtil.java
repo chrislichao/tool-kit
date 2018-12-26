@@ -51,7 +51,7 @@ public class DateUtil {
      */
     public static Date secondsToDate(Integer seconds) {
         Assert.notNull(seconds);
-        return millisToDate(Long.valueOf(seconds * 1000));
+        return millisToDate(Long.valueOf(seconds * 1000L));
     }
 
     /**
@@ -59,7 +59,7 @@ public class DateUtil {
      */
     public static Date secondsToDate(Integer seconds, String pattern) {
         Assert.notNull(seconds);
-        return millisToDate(Long.valueOf(seconds * 1000), pattern);
+        return millisToDate(Long.valueOf(seconds * 1000L), pattern);
     }
 
     /**
@@ -77,7 +77,7 @@ public class DateUtil {
      */
     public static Date millisToDate(Long millis, String pattern) {
         Assert.notNull(millis);
-        return dateStrToDate(millisToDateStr(millis, pattern), pattern);
+        return dateStrToDate(dateToDateStr(millisToDate(millis), pattern), pattern);
     }
 
     /**
@@ -105,7 +105,7 @@ public class DateUtil {
      * [将毫秒数{millis}转为日期字符串,格式为{pattern}]
      */
     public static String millisToDateStr(Long millis, String pattern) {
-        return secondsToDateStr(getSeconds(millis), pattern);
+        return dateToDateStr(millisToDate(millis, pattern), pattern);
     }
 
     /**

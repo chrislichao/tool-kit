@@ -54,12 +54,14 @@ public class JwtUtil {
      */
     public static String createToken(Map<String, String> claimMap, String currentTimePattern, long activeTime) {
         try {
+            long currentMillis = System.currentTimeMillis();
+            Date issuedAt = DateUtil.millisToDate(currentMillis, currentTimePattern);
             Date expiresAt = DateUtil.millisToDate(System.currentTimeMillis() + activeTime, currentTimePattern);
             JWTCreator.Builder builder = JWT.create().withHeader(headMap).withIssuer(ISSUER);
             for (String claimKey : claimMap.keySet()) {
                 builder.withClaim(claimKey, claimMap.get(claimKey));
             }
-            return builder.withIssuedAt(new Date()).withExpiresAt(expiresAt).sign(Algorithm.HMAC256(SECRET));
+            return builder.withIssuedAt(issuedAt).withExpiresAt(expiresAt).sign(Algorithm.HMAC256(SECRET));
         } catch (Exception e) {
             throw new FrameworkException(e.getLocalizedMessage());
         }
