@@ -130,6 +130,13 @@ public class DateUtil {
     }
 
     /**
+     * [将当前日期转为日期字符串,格式为{pattern}]
+     */
+    public static String getCurrentDateStr(String pattern) {
+        return dateToDateStr(new Date(), pattern);
+    }
+
+    /**
      * [将日期{date}转为日期时间字符串,格式为"yyyy-MM-dd HH:mm:ss"]
      */
     public static String getCurrentDatetimeStr() {
@@ -231,8 +238,15 @@ public class DateUtil {
      * [日期字符串{dateStr}增加{amount}天返回,格式为"yyyy-MM-dd"]
      */
     public static String addDay(String dateStr, int amount) {
+        return addDay(dateStrToDate(dateStr), amount);
+    }
+
+    /**
+     * [日期字符串{dateStr}增加{amount}天返回,格式为"yyyy-MM-dd"]
+     */
+    public static String addDay(Date date, int amount) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dateStrToDate(dateStr));
+        calendar.setTime(date);
         calendar.add(Calendar.DATE, amount);
         return getDateFormat(DEFAULT_DATE_STR_FORMAT).format(calendar.getTime());
     }

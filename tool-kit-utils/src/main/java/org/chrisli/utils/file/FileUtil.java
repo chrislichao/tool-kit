@@ -28,10 +28,11 @@ public class FileUtil {
             file.mkdirs();
             return file;
         }
-        file = new File(fileName.substring(0, fileName.lastIndexOf(File.separator)));
+        file = file.getParentFile();
         file.mkdirs();
         file = new File(fileName);
-        if (file.exists()) { // 如果已存在,删除旧文件
+        // 如果已存在,删除旧文件
+        if (file.exists()) {
             file.delete();
         }
         try {
@@ -44,7 +45,7 @@ public class FileUtil {
 
     /**
      * [文件{file}中写入数据{data},编码格式为{characterEncoding}]
-     * 
+     *
      * @author Chris li[黎超]
      * @create [2017-04-12]
      */

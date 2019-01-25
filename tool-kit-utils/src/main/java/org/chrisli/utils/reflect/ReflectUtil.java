@@ -114,6 +114,18 @@ public class ReflectUtil {
     /**
      * [利用反射获取指定对象里面的指定方法]
      */
+    public static Method getMethod(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
+        try {
+            return clazz.getDeclaredMethod(methodName, parameterTypes);
+        } catch (NoSuchMethodException e) {
+            throw new FrameworkException(String.format("Can not find method[%s] in class[%s], please check your config!", methodName,
+                    clazz.getName()));
+        }
+    }
+
+    /**
+     * [利用反射获取指定对象里面的指定方法]
+     */
     public static Method getMethod(Class<?> startClazz, Class<?> endClazz, String methodName, Class<?>... parameterTypes) {
         Method method = null;
         for (Class<?> clazz = startClazz; clazz != endClazz; clazz = clazz.getSuperclass()) {
