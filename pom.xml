@@ -6,6 +6,7 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <!-- 配置私服
     <repositories>
         <repository>
             <id>nexus</id>
@@ -21,6 +22,7 @@
             <url>http://192.168.0.122:8081/nexus/content/groups/public</url>
         </pluginRepository>
     </pluginRepositories>
+    -->
 
     <!-- 定义snapshots和releases库的nexus地址 -->
     <distributionManagement>
@@ -60,6 +62,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>3.6.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>

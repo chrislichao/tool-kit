@@ -7,12 +7,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * [抽象的基础实体类,用于所有实体类继承]
+ * [抽象的基础实体类，用于所有实体类继承]
  *
  * @author Chris li[黎超]
  * @create [2017-04-12]
  */
-public abstract class BaseEntity implements Serializable{
+public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

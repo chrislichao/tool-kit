@@ -1,0 +1,16 @@
+buildscript {
+    apply from: "ext.gradle"
+
+    repositories {
+        maven { url nexusUrl }
+    }
+}
+
+allprojects {
+    group = 'org.chrisli'
+    version = '1.0.0'
+}
+
+subprojects {
+    apply from: "public.gradle"
+}

@@ -1,0 +1,12 @@
+ext {
+    nexusUrl = 'http://repo1.maven.org/maven2/'
+    nexusReleaseUrl = 'http://repo1.maven.org/maven2/'
+    nexusSnapshotUrl = 'http://repo1.maven.org/maven2/'
+
+    // nexusUrl = 'http://repo.anchnet.com/repository/maven-public/'
+    // nexusReleaseUrl = 'http://repo.anchnet.com/repository/maven-releases/'
+    // nexusSnapshotUrl = 'http://repo.anchnet.com/repository/maven-snapshots/'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
