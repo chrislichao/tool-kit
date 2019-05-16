@@ -1,12 +1,12 @@
-package org.chrisli.log4jdbc;
+package org.chrisli.log4jdbc.utils;
 
 /**
- * [工具类]
+ * [字符串格式化工具类]
  *
  * @author Chris li[黎超]
  * @create [2017-04-12]
  */
-public class Util {
+public class StringFormatUtil {
     /**
      * [右对齐]
      */

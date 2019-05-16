@@ -13,7 +13,7 @@ import java.util.List;
 import org.chrisli.log4jdbc.Proxy;
 import org.chrisli.log4jdbc.ProxyLogDelegator;
 import org.chrisli.log4jdbc.ProxyLogFactory;
-import org.chrisli.log4jdbc.Util;
+import org.chrisli.log4jdbc.utils.StringFormatUtil;
 
 /**
  * [Statement代理类]
@@ -279,7 +279,7 @@ public class StatementProxy implements Statement, Proxy {
         for (int i = 0; i < j; ) {
             sql = (String) currentBatch.get(i);
             batchReport.append("\n");
-            batchReport.append(Util.rightJustify(fieldSize, "" + (++i)));
+            batchReport.append(StringFormatUtil.rightJustify(fieldSize, "" + (++i)));
             batchReport.append(":  ");
             batchReport.append(sql);
         }
