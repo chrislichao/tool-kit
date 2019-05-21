@@ -2,4 +2,5 @@ rootProject.name = "tool-kit"
 
 include "tool-kit-log4jdbc"
 include "tool-kit-mybatis"
+include "tool-kit-spring-log4jdbc"
 include "tool-kit-utils"

@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+configurations.all {
+    // 10秒钟，可自定义，如10,'minutes'10分钟，10,'hours'10小时
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+repositories {
+    maven { url nexusUrl }
+}
+
+publishing {
+    apply from: "${project.gradle.gradleHomeDir}/conf.gradle"
+
+    publications {
+        plugin(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version project.version
+            // 若是war包，就写components.web,若是jar包，就写components.java
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            if (project.version.endsWith('-SNAPSHOT')) {
+                url = nexusSnapshotUrl
+            } else {
+                url = nexusReleaseUrl
+            }
+            credentials {
+                username nexusUsername
+                password nexusPassword
+            }
+        }
+    }
+}
