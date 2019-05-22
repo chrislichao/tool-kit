@@ -31,7 +31,7 @@ public class ApplicationStartedListener implements ApplicationRunner, Applicatio
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        logger.info("Springboot application startup completed!");
+        logger.info(">>>>> Springboot application startup completed! <<<<<");
         for (String dataSourceBeanName : Constant.enableLog4jdbc.dataSourceBeanNames()) {
             Object dataSourceBean = applicationContext.getBean(dataSourceBeanName);
             if (dataSourceBean == null) {
