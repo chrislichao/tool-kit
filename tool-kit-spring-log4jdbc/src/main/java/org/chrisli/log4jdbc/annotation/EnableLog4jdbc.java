@@ -1,6 +1,7 @@
 package org.chrisli.log4jdbc.annotation;
 
 import org.chrisli.log4jdbc.spring.DataSourceBeanRegistrar;
+import org.chrisli.log4jdbc.spring.listener.ApplicationStartedListener;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -13,7 +14,7 @@ import java.lang.annotation.*;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({DataSourceBeanRegistrar.class})
+@Import({DataSourceBeanRegistrar.class, ApplicationStartedListener.class})
 @Documented
 @Inherited
 public @interface EnableLog4jdbc {
