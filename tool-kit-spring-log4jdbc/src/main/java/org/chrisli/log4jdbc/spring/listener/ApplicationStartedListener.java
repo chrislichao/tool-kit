@@ -37,16 +37,16 @@ public class ApplicationStartedListener implements ApplicationRunner, Applicatio
             try {
                 dataSourceBean = applicationContext.getBean(dataSourceBeanName);
             } catch (Exception e) {
-                logger.error("Exception when get bean[{0}],message : {1}!", dataSourceBeanName, e.getMessage());
+                logger.error("Exception when get bean[{}],message : {}!", dataSourceBeanName, e.getMessage());
             }
             if (dataSourceBean == null) {
-                logger.error("DataSource bean not exist whose name is {0}, will be ignored!", dataSourceBeanName);
+                logger.error("DataSource bean not exist whose name is {}, will be ignored!", dataSourceBeanName);
             }
             if (dataSourceBean instanceof DataSource) {
                 // 代理真实的DataSource
                 DataSourceBeanRegistrar.registryProxyDataSourceBean(applicationContext, dataSourceBeanName, dataSourceBean);
             } else {
-                logger.info("Bean[{0}] is not instance of class[javax.sql.DataSource], will be ignored!", dataSourceBeanName);
+                logger.info("Bean[{}] is not instance of class[javax.sql.DataSource], will be ignored!", dataSourceBeanName);
             }
         }
     }
