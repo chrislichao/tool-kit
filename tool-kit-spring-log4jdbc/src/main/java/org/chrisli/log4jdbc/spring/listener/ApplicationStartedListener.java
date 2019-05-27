@@ -40,7 +40,7 @@ public class ApplicationStartedListener implements ApplicationRunner, Applicatio
                 logger.error("Exception when get bean[{}],message : {}!", dataSourceBeanName, e.getMessage());
             }
             if (dataSourceBean == null) {
-                logger.error("DataSource bean not exist whose name is {}, will be ignored!", dataSourceBeanName);
+                logger.error("DataSource bean not exist whose name is [{}], will be ignored!", dataSourceBeanName);
             }
             if (dataSourceBean instanceof DataSource) {
                 // 代理真实的DataSource
