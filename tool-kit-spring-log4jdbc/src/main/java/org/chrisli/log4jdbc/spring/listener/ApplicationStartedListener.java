@@ -33,10 +33,14 @@ public class ApplicationStartedListener implements ApplicationRunner, Applicatio
     public void run(ApplicationArguments args) throws Exception {
         logger.info(">>>>> Springboot application startup completed! <<<<<");
         for (String dataSourceBeanName : Constant.enableLog4jdbc.dataSourceBeanNames()) {
-            Object dataSourceBean = applicationContext.getBean(dataSourceBeanName);
+            Object dataSourceBean = null;
+            try {
+                dataSourceBean = applicationContext.getBean(dataSourceBeanName);
+            } catch (Exception e) {
+                logger.error("Exception when get bean[{0}],message : {1}!", dataSourceBeanName, e.getMessage());
+            }
             if (dataSourceBean == null) {
-                logger.error("DataSource bean not exist whose name is {0}!", dataSourceBeanName);
-                throw new RuntimeException("DataSource bean not exist whose name is " + dataSourceBeanName + "!");
+                logger.error("DataSource bean not exist whose name is {0}, will be ignored!", dataSourceBeanName);
             }
             if (dataSourceBean instanceof DataSource) {
                 // 代理真实的DataSource
@@ -46,5 +50,4 @@ public class ApplicationStartedListener implements ApplicationRunner, Applicatio
             }
         }
     }
-
 }
