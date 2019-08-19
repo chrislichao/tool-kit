@@ -1,6 +1,6 @@
 package org.chrisli.log4jdbc.spring;
 
-import org.chrisli.log4jdbc.proxy.DatasourceInvocationHandler;
+import org.chrisli.log4jdbc.proxy.DataSourceInvocationHandler;
 import org.springframework.beans.factory.FactoryBean;
 
 import javax.sql.DataSource;
@@ -23,7 +23,7 @@ public class DataSourceFactoryBean<T> implements FactoryBean<T> {
      * @create [2017-04-12]
      */
     public T getObject() throws Exception {
-        return (T) Proxy.newProxyInstance(DataSource.class.getClassLoader(), new Class[]{DataSource.class}, new DatasourceInvocationHandler(realDataSourceBean));
+        return (T) Proxy.newProxyInstance(DataSource.class.getClassLoader(), new Class[]{DataSource.class}, new DataSourceInvocationHandler(realDataSourceBean));
     }
 
     /**

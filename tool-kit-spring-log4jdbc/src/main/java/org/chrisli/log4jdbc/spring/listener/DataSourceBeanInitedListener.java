@@ -5,22 +5,21 @@ import org.chrisli.log4jdbc.spring.DataSourceBeanRegistrar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import javax.sql.DataSource;
 
 /**
- * [应用启动监听器]
+ * [数据源Bean初始化完成监听器]
  *
  * @author Chris li[黎超]
  * @create [2017-04-12]
  */
-public class ApplicationStartedListener implements ApplicationRunner, ApplicationContextAware {
+public class DataSourceBeanInitedListener implements InitializingBean, ApplicationContextAware {
 
-    private Logger logger = LoggerFactory.getLogger(ApplicationStartedListener.class);
+    private Logger logger = LoggerFactory.getLogger(DataSourceBeanInitedListener.class);
 
     private ApplicationContext applicationContext;
 
@@ -30,8 +29,8 @@ public class ApplicationStartedListener implements ApplicationRunner, Applicatio
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
-        logger.info(">>>>> Springboot application startup completed! <<<<<");
+    public void afterPropertiesSet() throws Exception {
+        logger.info(">>>>> Spring bean init completed! <<<<<");
         for (String dataSourceBeanName : Constant.enableLog4jdbc.dataSourceBeanNames()) {
             Object dataSourceBean = null;
             try {

@@ -15,11 +15,11 @@ import java.sql.Connection;
  * @author Chris li[黎超]
  * @create [2017-04-12]
  */
-public class DatasourceInvocationHandler implements InvocationHandler {
+public class DataSourceInvocationHandler implements InvocationHandler {
 
     private Object realDataSourceBean;
 
-    public DatasourceInvocationHandler(Object realDataSourceBean) {
+    public DataSourceInvocationHandler(Object realDataSourceBean) {
         this.realDataSourceBean = realDataSourceBean;
     }
 
