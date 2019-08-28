@@ -1,4 +1,4 @@
-package org.chrisli.log4jdbc.rdbms;
+package org.chrisli.log4jdbc.rdbms.base;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,5 +61,4 @@ public class RdbmsSpecifics {
         }
         return out.toString();
     }
-
 }

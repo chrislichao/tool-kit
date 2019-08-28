@@ -1,7 +1,7 @@
-package org.chrisli.log4jdbc.proxy;
+package org.chrisli.log4jdbc.handler;
 
-import org.chrisli.log4jdbc.ProxyLogFactory;
-import org.chrisli.log4jdbc.rdbms.RdbmsSpecifics;
+import org.chrisli.log4jdbc.proxy.ProxyLogFactory;
+import org.chrisli.log4jdbc.rdbms.base.RdbmsSpecifics;
 import org.chrisli.log4jdbc.sql.ConnectionProxy;
 import org.chrisli.log4jdbc.sql.DriverProxy;
 
@@ -36,7 +36,7 @@ public class DataSourceInvocationHandler implements InvocationHandler {
      * [代理接口方法调用处理逻辑]
      *
      * @author Chris li[黎超]
-     * @create [2017/4/12]
+     * @create [2017-04-12]
      */
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object result = method.invoke(realDataSourceBean, args);

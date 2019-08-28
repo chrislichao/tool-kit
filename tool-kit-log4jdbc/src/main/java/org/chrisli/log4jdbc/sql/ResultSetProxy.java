@@ -22,9 +22,9 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Map;
 
-import org.chrisli.log4jdbc.Proxy;
-import org.chrisli.log4jdbc.ProxyLogDelegator;
-import org.chrisli.log4jdbc.ProxyLogFactory;
+import org.chrisli.log4jdbc.proxy.Proxy;
+import org.chrisli.log4jdbc.proxy.ProxyLogDelegator;
+import org.chrisli.log4jdbc.proxy.ProxyLogFactory;
 
 /**
  * [结果集代理类]
@@ -2138,5 +2138,4 @@ public class ResultSetProxy implements ResultSet, Proxy {
             throw s;
         }
     }
-
 }

@@ -10,9 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.chrisli.log4jdbc.Proxy;
-import org.chrisli.log4jdbc.ProxyLogDelegator;
-import org.chrisli.log4jdbc.ProxyLogFactory;
+import org.chrisli.log4jdbc.proxy.Proxy;
+import org.chrisli.log4jdbc.proxy.ProxyLogDelegator;
+import org.chrisli.log4jdbc.proxy.ProxyLogFactory;
 import org.chrisli.log4jdbc.utils.StringFormatUtil;
 
 /**
@@ -46,9 +46,7 @@ public class StatementProxy implements Statement, Proxy {
         }
         this.realStatement = realStatement;
         this.connectionProxy = connectionProxy;
-
         log = ProxyLogFactory.getProxyLogDelegator();
-
         if (realStatement instanceof CallableStatement) {
             reportReturn("new CallableStatement");
         } else if (realStatement instanceof PreparedStatement) {
@@ -201,7 +199,6 @@ public class StatementProxy implements Statement, Proxy {
 
     public boolean getMoreResults() throws SQLException {
         String methodCall = "getMoreResults()";
-
         try {
             return reportReturn(methodCall, realStatement.getMoreResults());
         } catch (SQLException s) {
@@ -223,7 +220,6 @@ public class StatementProxy implements Statement, Proxy {
 
     public void addBatch(String sql) throws SQLException {
         String methodCall = "addBatch(" + sql + ")";
-
         currentBatch.add(StatementSqlWarning + sql);
         try {
             realStatement.addBatch(sql);
@@ -269,12 +265,9 @@ public class StatementProxy implements Statement, Proxy {
 
     public int[] executeBatch() throws SQLException {
         String methodCall = "executeBatch()";
-
         int j = currentBatch.size();
         StringBuffer batchReport = new StringBuffer("batching " + j + " statements:");
-
         int fieldSize = ("" + j).length();
-
         String sql;
         for (int i = 0; i < j; ) {
             sql = (String) currentBatch.get(i);
@@ -283,17 +276,15 @@ public class StatementProxy implements Statement, Proxy {
             batchReport.append(":  ");
             batchReport.append(sql);
         }
-
         sql = batchReport.toString();
         reportSql(sql, methodCall);
-        long tstart = System.currentTimeMillis();
-
+        long startTime = System.currentTimeMillis();
         int[] updateResults;
         try {
             updateResults = realStatement.executeBatch();
-            reportSqlTiming(System.currentTimeMillis() - tstart, sql, methodCall);
+            reportSqlTiming(System.currentTimeMillis() - startTime, sql, methodCall);
         } catch (SQLException s) {
-            reportException(methodCall, s, sql, System.currentTimeMillis() - tstart);
+            reportException(methodCall, s, sql, System.currentTimeMillis() - startTime);
             throw s;
         }
         currentBatch.clear();
@@ -375,7 +366,6 @@ public class StatementProxy implements Statement, Proxy {
 
     public boolean getMoreResults(int current) throws SQLException {
         String methodCall = "getMoreResults(" + current + ")";
-
         try {
             return reportReturn(methodCall, realStatement.getMoreResults(current));
         } catch (SQLException s) {
@@ -663,5 +653,4 @@ public class StatementProxy implements Statement, Proxy {
     public boolean isCloseOnCompletion() throws SQLException {
         return realStatement.isCloseOnCompletion();
     }
-
 }

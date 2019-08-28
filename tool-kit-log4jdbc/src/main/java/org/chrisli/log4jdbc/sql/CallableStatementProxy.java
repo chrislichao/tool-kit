@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Map;
 
-import org.chrisli.log4jdbc.Proxy;
+import org.chrisli.log4jdbc.proxy.Proxy;
 
 /**
  * [可执行的Statement代理类]

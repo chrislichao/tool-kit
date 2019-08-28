@@ -5,8 +5,8 @@ import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.util.StringTokenizer;
 
-import org.chrisli.log4jdbc.Proxy;
-import org.chrisli.log4jdbc.ProxyLogDelegator;
+import org.chrisli.log4jdbc.proxy.Proxy;
+import org.chrisli.log4jdbc.proxy.ProxyLogDelegator;
 import org.chrisli.log4jdbc.sql.ConnectionProxy;
 import org.chrisli.log4jdbc.sql.ResultSetProxy;
 import org.slf4j.Logger;

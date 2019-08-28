@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.chrisli.log4jdbc.Proxy;
-import org.chrisli.log4jdbc.rdbms.RdbmsSpecifics;
+import org.chrisli.log4jdbc.proxy.Proxy;
+import org.chrisli.log4jdbc.rdbms.base.RdbmsSpecifics;
 
 /**
  * [预执行Statement代理类]
@@ -78,9 +78,7 @@ public class PreparedStatementProxy extends StatementProxy implements PreparedSt
             if (arg == null) {
                 arg = "?";
             }
-
             argIdx++;
-
             dumpSql.append(sql.substring(lastPos, Qpos));
             lastPos = Qpos + 1;
             Qpos = sql.indexOf('?', lastPos);
@@ -89,7 +87,6 @@ public class PreparedStatementProxy extends StatementProxy implements PreparedSt
         if (lastPos < sql.length()) {
             dumpSql.append(sql.substring(lastPos, sql.length()));
         }
-
         return dumpSql.toString();
     }
 

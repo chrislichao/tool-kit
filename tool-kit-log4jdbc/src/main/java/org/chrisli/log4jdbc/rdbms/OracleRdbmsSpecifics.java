@@ -1,5 +1,7 @@
 package org.chrisli.log4jdbc.rdbms;
 
+import org.chrisli.log4jdbc.rdbms.base.RdbmsSpecifics;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,5 +27,4 @@ public class OracleRdbmsSpecifics extends RdbmsSpecifics {
         }
         return super.formatParameterObject(object);
     }
-
 }

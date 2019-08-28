@@ -1,4 +1,4 @@
-package org.chrisli.log4jdbc;
+package org.chrisli.log4jdbc.proxy;
 
 /**
  * [代理日志委托者接口]

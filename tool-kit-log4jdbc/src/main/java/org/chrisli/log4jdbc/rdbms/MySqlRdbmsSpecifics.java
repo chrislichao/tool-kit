@@ -1,5 +1,7 @@
 package org.chrisli.log4jdbc.rdbms;
 
+import org.chrisli.log4jdbc.rdbms.base.RdbmsSpecifics;
+
 import java.text.SimpleDateFormat;
 
 /**
@@ -26,5 +28,4 @@ public class MySqlRdbmsSpecifics extends RdbmsSpecifics {
         }
         return super.formatParameterObject(object);
     }
-
 }

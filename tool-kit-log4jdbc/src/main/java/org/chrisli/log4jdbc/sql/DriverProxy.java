@@ -1,23 +1,18 @@
 package org.chrisli.log4jdbc.sql;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.DriverPropertyInfo;
-import java.sql.SQLException;
-import java.sql.SQLFeatureNotSupportedException;
+import org.chrisli.log4jdbc.proxy.ProxyLogDelegator;
+import org.chrisli.log4jdbc.proxy.ProxyLogFactory;
+import org.chrisli.log4jdbc.rdbms.MySqlRdbmsSpecifics;
+import org.chrisli.log4jdbc.rdbms.OracleRdbmsSpecifics;
+import org.chrisli.log4jdbc.rdbms.SqlServerRdbmsSpecifics;
+import org.chrisli.log4jdbc.rdbms.base.RdbmsSpecifics;
+
+import java.sql.*;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
-
-import org.chrisli.log4jdbc.ProxyLogDelegator;
-import org.chrisli.log4jdbc.ProxyLogFactory;
-import org.chrisli.log4jdbc.rdbms.MySqlRdbmsSpecifics;
-import org.chrisli.log4jdbc.rdbms.OracleRdbmsSpecifics;
-import org.chrisli.log4jdbc.rdbms.RdbmsSpecifics;
 
 /**
  * [数据库驱动代理类]
@@ -40,12 +35,16 @@ public class DriverProxy implements Driver {
 
         OracleRdbmsSpecifics oracle = new OracleRdbmsSpecifics();
         MySqlRdbmsSpecifics mySql = new MySqlRdbmsSpecifics();
+        SqlServerRdbmsSpecifics sqlServer = new SqlServerRdbmsSpecifics();
 
         rdbmsSpecifics = new HashMap<String, RdbmsSpecifics>();
         rdbmsSpecifics.put("Oracle JDBC driver", oracle);
         rdbmsSpecifics.put("oracle.jdbc.driver.OracleDriver", oracle);
         rdbmsSpecifics.put("oracle.jdbc.OracleDriver", oracle);
         rdbmsSpecifics.put("com.mysql.jdbc.Driver", mySql);
+        rdbmsSpecifics.put("net.sourceforge.jtds.jdbc.Driver", sqlServer);
+        rdbmsSpecifics.put("com.microsoft.jdbc.sqlserver.SQLServerDriver", sqlServer);
+        rdbmsSpecifics.put("weblogic.jdbc.sqlserver.SQLServerDriver", sqlServer);
 
         log.debug("... log4jdbc initialized! ...");
     }
@@ -62,16 +61,13 @@ public class DriverProxy implements Driver {
             DatabaseMetaData dbm = conn.getMetaData();
             driverName = dbm.getDriverName();
         } catch (SQLException s) {
+            // 忽略
         }
-
         log.debug("driver name is " + driverName);
-
         RdbmsSpecifics rdbmsSpecificx = (RdbmsSpecifics) rdbmsSpecifics.get(driverName);
-
         if (rdbmsSpecificx == null) {
             return defaultRdbmsSpecifics;
         }
-
         return rdbmsSpecificx;
     }
 
@@ -114,7 +110,6 @@ public class DriverProxy implements Driver {
         url = url.substring(9);
         lastUnderlyingDriverRequested = driver;
         Connection connection = driver.connect(url, info);
-
         if (connection == null) {
             throw new SQLException("invalid or unknown driver url: " + url);
         }
@@ -125,7 +120,6 @@ public class DriverProxy implements Driver {
             if (dclass != null && dclass.length() > 0) {
                 rdbmsSpecificx = (RdbmsSpecifics) rdbmsSpecifics.get(dclass);
             }
-
             if (rdbmsSpecificx == null) {
                 rdbmsSpecificx = defaultRdbmsSpecifics;
             }

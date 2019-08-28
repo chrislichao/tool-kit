@@ -22,10 +22,10 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-import org.chrisli.log4jdbc.Proxy;
-import org.chrisli.log4jdbc.ProxyLogDelegator;
-import org.chrisli.log4jdbc.ProxyLogFactory;
-import org.chrisli.log4jdbc.rdbms.RdbmsSpecifics;
+import org.chrisli.log4jdbc.proxy.Proxy;
+import org.chrisli.log4jdbc.proxy.ProxyLogDelegator;
+import org.chrisli.log4jdbc.proxy.ProxyLogFactory;
+import org.chrisli.log4jdbc.rdbms.base.RdbmsSpecifics;
 
 /**
  * [连接驱动代理]

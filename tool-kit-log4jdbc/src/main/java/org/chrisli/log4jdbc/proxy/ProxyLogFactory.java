@@ -1,4 +1,4 @@
-package org.chrisli.log4jdbc;
+package org.chrisli.log4jdbc.proxy;
 
 import org.chrisli.log4jdbc.logger.Slf4jProxyLogDelegator;
 

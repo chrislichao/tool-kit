@@ -1,10 +1,9 @@
 package org.chrisli.log4jdbc.spring;
 
-import org.chrisli.log4jdbc.proxy.DataSourceInvocationHandler;
+import org.chrisli.log4jdbc.DataSourceAgent;
 import org.springframework.beans.factory.FactoryBean;
 
 import javax.sql.DataSource;
-import java.lang.reflect.Proxy;
 
 /**
  * [数据源工厂Bean]
@@ -23,7 +22,10 @@ public class DataSourceFactoryBean<T> implements FactoryBean<T> {
      * @create [2017-04-12]
      */
     public T getObject() throws Exception {
-        return (T) Proxy.newProxyInstance(DataSource.class.getClassLoader(), new Class[]{DataSource.class}, new DataSourceInvocationHandler(realDataSourceBean));
+        if (!(realDataSourceBean instanceof DataSource)) {
+            throw new Exception("非【javax.sql.DataSource】接口的实例，无法代理!");
+        }
+        return (T) DataSourceAgent.newProxyInstance((DataSource) realDataSourceBean);
     }
 
     /**
@@ -40,7 +42,7 @@ public class DataSourceFactoryBean<T> implements FactoryBean<T> {
      * [是否单例]
      *
      * @author Chris li[黎超]
-     * @create [2019/5/20]
+     * @create [2017-04-12]
      */
     public boolean isSingleton() {
         return true;
