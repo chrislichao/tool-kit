@@ -76,6 +76,7 @@ public class PropertyUtil {
                 properties.load(propertyStream);
                 logger.debug("classpath下发现配置文件【{}】,将读取相关配置项", Log4jdbcConstant.DEFAULT_PROPERTY_NAME);
                 // 读取配置并刷新配置类中的属性
+                Log4jdbcConfig.property_refresh_period = getLongOption(properties, Log4jdbcConstant.PROPERTY_KEY_PROPERTY_REFRESH_PERIOD, Log4jdbcConstant.DEFAULT_PROPERTY_REFRESH_PERIOD);
                 Log4jdbcConfig.enable_sql_logged = getBooleanOption(properties, Log4jdbcConstant.PROPERTY_KEY_ENABLE_SQL_LOGGED, Log4jdbcConstant.DEFAULT_ENABLE_SQL_LOGGED);
             } catch (IOException e) {
                 logger.warn("加载classpath下配置文件【{}】出现异常:【{}】", Log4jdbcConstant.DEFAULT_PROPERTY_NAME, e.getLocalizedMessage());
