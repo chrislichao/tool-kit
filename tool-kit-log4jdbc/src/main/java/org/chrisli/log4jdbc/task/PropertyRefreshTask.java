@@ -1,10 +1,8 @@
 package org.chrisli.log4jdbc.task;
 
 import org.chrisli.log4jdbc.config.Log4jdbcConfig;
-import org.chrisli.log4jdbc.constant.Log4jdbcConstant;
 import org.chrisli.log4jdbc.utils.PropertyUtil;
 
-import javax.naming.ConfigurationException;
 import java.util.Timer;
 import java.util.TimerTask;
 
