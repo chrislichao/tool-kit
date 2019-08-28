@@ -8,7 +8,10 @@ package org.chrisli.log4jdbc.utils;
  */
 public class StringFormatUtil {
     /**
-     * [右对齐]
+     * [字符串右对齐,向前补空格]
+     *
+     * @author Chris li[黎超]
+     * @create [2017-04-12]
      */
     public static String rightJustify(int fieldSize, String field) {
         if (field == null) {

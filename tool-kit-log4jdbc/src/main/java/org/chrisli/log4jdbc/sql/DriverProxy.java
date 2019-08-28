@@ -42,9 +42,7 @@ public class DriverProxy implements Driver {
         rdbmsSpecifics.put("oracle.jdbc.driver.OracleDriver", oracle);
         rdbmsSpecifics.put("oracle.jdbc.OracleDriver", oracle);
         rdbmsSpecifics.put("com.mysql.jdbc.Driver", mySql);
-        rdbmsSpecifics.put("net.sourceforge.jtds.jdbc.Driver", sqlServer);
-        rdbmsSpecifics.put("com.microsoft.jdbc.sqlserver.SQLServerDriver", sqlServer);
-        rdbmsSpecifics.put("weblogic.jdbc.sqlserver.SQLServerDriver", sqlServer);
+        rdbmsSpecifics.put("com.microsoft.sqlserver.jdbc.SQLServerDriver", sqlServer);
 
         log.debug("... log4jdbc initialized! ...");
     }

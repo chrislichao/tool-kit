@@ -1,16 +1,21 @@
 package org.chrisli.log4jdbc.logger;
 
-import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.StringReader;
-import java.util.StringTokenizer;
-
+import org.chrisli.log4jdbc.constant.Log4jdbcConstant;
 import org.chrisli.log4jdbc.proxy.Proxy;
 import org.chrisli.log4jdbc.proxy.ProxyLogDelegator;
 import org.chrisli.log4jdbc.sql.ConnectionProxy;
+import org.chrisli.log4jdbc.sql.DriverProxy;
 import org.chrisli.log4jdbc.sql.ResultSetProxy;
+import org.chrisli.log4jdbc.utils.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.LineNumberReader;
+import java.io.StringReader;
+import java.util.Properties;
+import java.util.StringTokenizer;
 
 /**
  * [SLF4J代理日志的处理者]
@@ -20,8 +25,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Slf4jProxyLogDelegator implements ProxyLogDelegator {
 
-    public Slf4jProxyLogDelegator() {
-    }
+    private static final Logger logger = LoggerFactory.getLogger(Slf4jProxyLogDelegator.class);
 
     private final Logger jdbcLogger = LoggerFactory.getLogger("jdbc.audit");
 
@@ -36,6 +40,38 @@ public class Slf4jProxyLogDelegator implements ProxyLogDelegator {
     private final Logger debugLogger = LoggerFactory.getLogger("log4jdbc.debug");
 
     private static String nl = System.getProperty("line.separator");
+
+    /**
+     * [启用SQL记录,默认为true]
+     *
+     * @author Chris li[黎超]
+     * @create [2019/8/28]
+     */
+    private static boolean enableSqlLogged = true;
+
+    static {
+        // 加载配置文件
+        InputStream propertyStream = DriverProxy.class.getResourceAsStream(Log4jdbcConstant.DEFAULT_PROPERTY_PATH);
+        Properties properties = new Properties(System.getProperties());
+        if (propertyStream != null) {
+            try {
+                properties.load(propertyStream);
+                logger.debug("classpath下发现配置文件【{}】,将读取相关配置项", Log4jdbcConstant.DEFAULT_PROPERTY_NAME);
+            } catch (IOException e) {
+                logger.warn("加载classpath下配置文件【{}】出现异常:【{}】", Log4jdbcConstant.DEFAULT_PROPERTY_NAME, e.getLocalizedMessage());
+            } finally {
+                try {
+                    propertyStream.close();
+                } catch (IOException e) {
+                    logger.warn("关闭classpath下配置文件【{}】文件流出现异常:【{}】", Log4jdbcConstant.DEFAULT_PROPERTY_NAME, e.getLocalizedMessage());
+                }
+            }
+        } else {
+            logger.debug("classpath下未发现配置文件【log4jdbc.properties】,将使用默认配置");
+            // 读取配置
+            enableSqlLogged = PropertyUtil.getBooleanOption(properties, Log4jdbcConstant.PROPERTY_KEY_ENABLE_SQL_LOGGED, true);
+        }
+    }
 
     public boolean isJdbcLoggingEnabled() {
         return jdbcLogger.isErrorEnabled() || resultSetLogger.isErrorEnabled() || sqlOnlyLogger.isErrorEnabled() || sqlTimingLogger.isErrorEnabled()
@@ -85,7 +121,7 @@ public class Slf4jProxyLogDelegator implements ProxyLogDelegator {
     }
 
     /**
-     * [判断SQL是否需要被记录日志]
+     * [判断SQL是否需要被记录日志,支持配置档控制]
      *
      * @author Chris li[黎超]
      * @create [2017-04-12]
@@ -94,14 +130,7 @@ public class Slf4jProxyLogDelegator implements ProxyLogDelegator {
         if (sql == null) {
             return false;
         }
-        return true;
-        // sql = sql.trim();
-        //
-        // if (sql.length() < 6) {
-        //     return false;
-        // }
-        // sql = sql.substring(0, 6).toLowerCase();
-        // return ("select".equals(sql) || "insert".equals(sql) || "update".equals(sql) || "delete".equals(sql) || "create".equals(sql) || sql.startsWith("call") || sql.startsWith("with"));
+        return enableSqlLogged;
     }
 
     public void sqlOccured(Proxy proxy, String methodCall, String sql) {

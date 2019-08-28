@@ -1,7 +1,7 @@
 package org.chrisli.log4jdbc.spring;
 
-import org.chrisli.log4jdbc.Constant;
 import org.chrisli.log4jdbc.annotation.EnableLog4jdbc;
+import org.chrisli.log4jdbc.config.Log4jdbcConfig;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -25,7 +25,7 @@ public class DataSourceBeanRegistrar implements ImportBeanDefinitionRegistrar {
     private static ApplicationContext applicationContext;
 
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        Constant.enableLog4jdbc = ((StandardAnnotationMetadata) importingClassMetadata).getIntrospectedClass().getAnnotation(EnableLog4jdbc.class);
+        Log4jdbcConfig.dataSourceBeanNames = ((StandardAnnotationMetadata) importingClassMetadata).getIntrospectedClass().getAnnotation(EnableLog4jdbc.class).dataSourceBeanNames();
     }
 
     /**

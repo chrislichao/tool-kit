@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.lang.reflect.Proxy;
 
 /**
- * [数据源代理]
+ * [数据源代理器]
  *
  * @author Chris li[黎超]
  * @create [2017-04-12]
