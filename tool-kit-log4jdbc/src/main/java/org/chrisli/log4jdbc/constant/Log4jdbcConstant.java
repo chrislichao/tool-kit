@@ -18,5 +18,17 @@ public class Log4jdbcConstant {
     /**
      * 配置启用日志记录的键
      */
+    public static final String PROPERTY_KEY_PROPERTY_REFRESH_PERIOD = "log4jdbc.config.propertyRefreshPeriod";
+    /**
+     * 配置启用日志记录的键
+     */
     public static final String PROPERTY_KEY_ENABLE_SQL_LOGGED = "log4jdbc.config.enableSqlLogged";
+    /**
+     * 默认的配置文件读取更新时间间隔,单位:秒
+     */
+    public static final long DEFAULT_PROPERTY_REFRESH_PERIOD = 5;
+    /**
+     * 默认启用日志记录
+     */
+    public static final boolean DEFAULT_ENABLE_SQL_LOGGED = true;
 }
