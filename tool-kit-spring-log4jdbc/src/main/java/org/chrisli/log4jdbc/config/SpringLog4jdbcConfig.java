@@ -6,7 +6,7 @@ package org.chrisli.log4jdbc.config;
  * @author Chris li[黎超]
  * @create [2019/8/28]
  */
-public class Log4jdbcConfig {
+public class SpringLog4jdbcConfig {
     /**
      * [数据源名称数组]
      */

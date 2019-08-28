@@ -5,7 +5,6 @@ import org.chrisli.log4jdbc.proxy.Proxy;
 import org.chrisli.log4jdbc.proxy.ProxyLogDelegator;
 import org.chrisli.log4jdbc.sql.ConnectionProxy;
 import org.chrisli.log4jdbc.sql.ResultSetProxy;
-import org.chrisli.log4jdbc.task.PropertyRefreshTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,11 +34,6 @@ public class Slf4jProxyLogDelegator implements ProxyLogDelegator {
     private final Logger debugLogger = LoggerFactory.getLogger("log4jdbc.debug");
 
     private static String nl = System.getProperty("line.separator");
-
-    static {
-        // 启动配置文件刷新任务
-        PropertyRefreshTask.start();
-    }
 
     public boolean isJdbcLoggingEnabled() {
         return jdbcLogger.isErrorEnabled() || resultSetLogger.isErrorEnabled() || sqlOnlyLogger.isErrorEnabled() || sqlTimingLogger.isErrorEnabled()

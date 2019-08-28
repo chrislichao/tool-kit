@@ -1,6 +1,7 @@
 package org.chrisli.log4jdbc;
 
 import org.chrisli.log4jdbc.handler.DataSourceInvocationHandler;
+import org.chrisli.log4jdbc.task.PropertyRefreshTask;
 
 import javax.sql.DataSource;
 import java.lang.reflect.Proxy;
@@ -12,6 +13,12 @@ import java.lang.reflect.Proxy;
  * @create [2017-04-12]
  */
 public class DataSourceAgent {
+
+    static {
+        // 启动配置文件刷新任务
+        PropertyRefreshTask.start();
+    }
+
     /**
      * [获取真实数据源的代理]
      *

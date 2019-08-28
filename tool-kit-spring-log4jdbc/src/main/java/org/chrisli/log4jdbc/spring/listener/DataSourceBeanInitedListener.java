@@ -1,6 +1,6 @@
 package org.chrisli.log4jdbc.spring.listener;
 
-import org.chrisli.log4jdbc.config.Log4jdbcConfig;
+import org.chrisli.log4jdbc.config.SpringLog4jdbcConfig;
 import org.chrisli.log4jdbc.spring.DataSourceBeanRegistrar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class DataSourceBeanInitedListener implements InitializingBean, Applicati
     @Override
     public void afterPropertiesSet() throws Exception {
         logger.info(">>>>> Spring bean init completed! <<<<<");
-        for (String dataSourceBeanName : Log4jdbcConfig.dataSourceBeanNames) {
+        for (String dataSourceBeanName : SpringLog4jdbcConfig.dataSourceBeanNames) {
             Object dataSourceBean = null;
             try {
                 dataSourceBean = applicationContext.getBean(dataSourceBeanName);
